@@ -1,0 +1,19 @@
+﻿@using HIN_Ventures.Static
+@{
+    ViewData["Title"] = "Payment";
+}
+
+@if (User.IsInRole(Roles.RoleFreelancer))
+{
+    <partial name="_FreelancerPaymentIndex" />
+}
+
+@if (User.IsInRole(Roles.RoleCustomer))
+{
+    <partial name="_CustomerPaymentIndex" />
+}
+
+@if (User.IsInRole(Roles.RoleSeniorDeveloper) || User.IsInRole(Roles.RoleAdmin) || User.IsInRole(Roles.RoleHINEmployee))
+{
+    <partial name="_HINVenturesPaymentIndex" />
+}

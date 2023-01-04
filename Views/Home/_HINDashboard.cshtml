@@ -1,0 +1,31 @@
+﻿<div class="menu-container">
+
+</div>
+<div class="menu-container">
+    <div class="images-container" onclick="navigateToPayment()">
+        <img src="/images/betalinger.jpg" width="300px" height="250px" alt="betalinger" />
+        <div class="dashboard-bottom">
+            <i class="material-icons">payments</i>
+            BETALINGER
+        </div>
+    </div>
+ 
+    <div class="images-container" onclick="navigateToAbout()">
+        <img src="/images/om hin-ventures.jpg" width="300px" height="250px" alt="om hin ventures" />
+        <div class="dashboard-bottom">
+            <i class="material-icons">info</i>
+            OM HIN-VENTURES
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function navigateToPayment() {
+        window.location.href = "/payment/_HINVenturesPaymentIndex";
+    }
+    function navigateToAbout() {
+        window.location.href = "/home/About";
+    }
+
+</script>

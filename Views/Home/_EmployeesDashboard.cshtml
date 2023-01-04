@@ -1,0 +1,70 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<link href="https://fonts.googleapis.com/css2?family=Material+Icons"
+      rel="stylesheet">
+
+<div class="menu-container">
+    <div class="images-container" onclick="navigateToApproveCode()">
+        <img src="/images/Kode til godkjenning.jpg" width="300px" height="250px" alt="godkjenning av kode" />
+        <div class="dashboard-top">
+            <i class="material-icons">preview</i>
+            KODE TIL GODKJENNING
+        </div>
+    </div>
+
+
+    <div class="images-container" onclick="navigateToAllAssignments()">
+        <img src="/images/alle oppdrag.jpg" width="300px" height="250px" alt="alle oppdrag" />
+        <div class="dashboard-top">
+            <i class="material-icons">assignment</i>
+             ALLE OPPDRAG
+        </div>
+    </div>
+
+    <div class="images-container" onclick="navigateToManagePayments()">
+        <img src="/images/administrer betalinger.jpg" width="300px" height="250px" alt="administrer betalinger" />
+        <div class="dashboard-top">
+            <i class="material-icons">savings</i>
+            ADMINISTRER BETALINGER
+        </div>
+    </div>
+</div>
+
+<div class="menu-container">
+    <div class="images-container" onclick="navigateToManageSubscriptions()">
+        <img src="/images/abonnement.png" width="300px" height="250px" alt="abonnement" />
+        <div class="dashboard-bottom">
+            <i class="material-icons">settings</i>
+            ABONNEMENT
+        </div>
+    </div>
+
+    <div class="images-container" onclick="navigateToStatistics()">
+        <img src="/images/statistikk.jpg" width="300px" height="250px" alt="statistikk" />
+        <div class="dashboard-bottom">
+            <i class="material-icons">equalizer</i> 
+             STATISTIKK OVERSIKT
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function navigateToApproveCode() {
+        window.location.href = "/senior/codeForApproval";
+    }
+    function navigateToAllAssignments() {
+        window.location.href = "/senior/showAllAssignments";
+    }
+    function navigateToManagePayments() {
+        window.location.href = "/payment/managePayments";
+    }
+    function navigateToManageSubscriptions() {
+        window.location.href = "/subscription/manageSubscriptions";
+    }
+    function navigateToStatistics() {
+        window.location.href = "/statistics/index";
+    }
+</script>

@@ -1,0 +1,91 @@
+﻿@{
+    ViewData["Title"] = "Customer Home Page";
+}
+
+<link href="https://fonts.googleapis.com/css2?family=Material+Icons"
+      rel="stylesheet">
+
+<div class="menu-container">
+    <div class="images-container" onclick="navigateToAssignment()">
+        <img src="/images/oppdrag.jpg" width="300px" height="250px" alt="nytt oppdrag" />
+        <div class="dashboard-top">
+            <i class="material-icons">add_circle</i>
+            NYTT OPPDRAG
+        </div>
+    </div>
+
+
+    <div class="images-container" onclick="navigateToDevelopers()">
+        <img src="/images/bla gjennom utviklerne.jpg" width="300px" height="250px" alt="bla gjennom utviklerne" />
+        <div class="dashboard-top">
+            <i class="material-icons">groups</i>
+            BLA GJENNOM UTVIKLERNE
+        </div>
+    </div>
+    
+    <div class="images-container" onclick="navigateToSubscriptions()">
+        <img src="/images/abonnement-kunde.jpg" width="300px" height="250px" alt="abonnement" />
+        <div class="dashboard-top">
+            <i class="material-icons">savings</i>
+            ABONNEMENT
+        </div>
+    </div>
+
+</div>
+
+<div class="menu-container">
+    <div class="images-container" onclick="navigateToPayment()">
+        <img src="/images/alle oppdrag.jpg" width="300px" height="250px" alt="betalinger" />
+        <div class="dashboard-bottom">
+            <i class="material-icons">assignment</i>
+            Mine oppdrag
+        </div>
+    </div>
+
+    <div class="images-container">
+        <img src="/images/send melding.jpg" width="300px" height="250px" alt="send melding" />
+        <div class="dashboard-bottom">
+            <i class="material-icons">mail</i>
+            SEND MELDING
+        </div>
+    </div>
+
+
+    <div class="images-container">
+        <img src="/images/om hin-ventures.jpg" width="300px" height="250px" alt="om hin-ventures" />
+        <div class="dashboard-bottom">
+            <i class="material-icons">info</i>
+            OM HIN-VENTURES
+        </div>
+    </div>
+</div>
+
+
+
+
+<script type="text/javascript">
+
+    function navigateToDevelopers() {
+
+        window.location.href = "/Freelancer/Index";
+
+    }
+    function navigateToAssignmentStatus() {
+        window.location.href = "/customer/assignmentStatus";
+    }
+
+    function navigateToAssignment() {
+        window.location.href = "/customer/NewAssignment";
+    }
+
+    function navigateToPayment() {
+        window.location.href = "/payment/_CustomerPaymentIndex";
+    }
+
+    function navigateToSubscriptions() {
+        window.location.href = "/subscription/Index";
+    }
+
+</script>
+
+

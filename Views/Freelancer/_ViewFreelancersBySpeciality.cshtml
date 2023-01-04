@@ -1,0 +1,21 @@
+﻿@model IEnumerable<HIN_Ventures.Models.Entities.Freelancer>
+
+@foreach (var item in Model)
+{
+    <div class="row">
+        <div class="col-4">
+            <h5>
+                <i class="fa fa-vcard"></i>
+                @Html.DisplayFor(modelItem => item.FirstName)
+                @Html.DisplayFor(modelItem => item.LastName)
+            </h5>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="" asp-action="" asp-route-id=""
+               class="btn btn-primary btn-sm">Se info <i class="fa fa-angle-double-right"></i></a>
+            <a asp-controller="" asp-action="" asp-route-id=""
+           class="btn btn-secondary btn-sm">Forespør <i class="fa fa-envelope"></i></a>
+        </div>
+    </div>
+    <br />
+}

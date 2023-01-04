@@ -1,0 +1,97 @@
+﻿@model List<HIN_Ventures.Models.Entities.Assignment>
+
+
+<h5>Mine oppdrag</h5>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+
+@if (Model != null)
+{
+
+ 
+
+    <div class="table-container">
+        <table class="table">
+
+            <thead>
+                <tr>
+                    <th>Tittel</th>
+                    <th>Beskrivelse</th>
+                    <th>Fremdrift</th>
+                    <th>Betalt</th>
+                    <th>Linjer</th>
+                    <th>Kode</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @for (var i = 0; i < Model.Count; i++)
+                {
+
+                    var id = Model[i].AssignmentId;
+                    var idName = "showCode" + id.ToString();
+                    var code = "";
+
+                    var assignment = Model[i];
+                    
+                    var paymentStatus = "Nei";
+                    if (assignment.IsPayed)
+                        paymentStatus = "Ja";
+
+                    var linesOfCode = 0;
+                    if (assignment.SubmittedCode != null)
+                    {
+                        linesOfCode = assignment.SubmittedCode.NumberOfLines;
+
+                    }
+
+                    
+                    <tr>
+                        <td>
+                            @assignment.Title
+                        </td>
+                        <td>
+                            @assignment.Description
+                        </td>
+                        <td>
+                            @assignment.Progress %
+                        </td>
+                        <td>@paymentStatus</td>
+                        <td>@linesOfCode</td>
+                        <td><div id="@idName" style="display: none">@assignment.SubmittedCode?.Code</div></td>
+                        
+                        <td>
+                            <form method="post">
+                                <button type="button" onclick="showCode(@Model[i].AssignmentId)" class="fa fa-info"></button>
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Betal
+                                    <input type="hidden" name="numberOfLines" value="@assignment.SubmittedCode?.NumberOfLines"/>
+                                    <input type="hidden" name="customerId" value="@assignment.CustomerId"/>
+                                    <input type="hidden" name="freelancerId" value="@assignment.FreelancerId"/>
+                                    <input type="hidden" name="assignmentId" value="@assignment.AssignmentId"/>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    
+                    
+                    
+
+                }
+
+            </tbody>
+        </table>
+    </div>
+}
+
+                                
+                                
+<script>
+
+    function showCode(id) {
+        var name = "showCode" + id.toString();
+        $('#' + name).toggle();
+    }
+
+</script>

@@ -1,0 +1,32 @@
+﻿@model IEnumerable<HIN_Ventures.Models.Entities.Subscription>
+
+
+@{
+    ViewData["Title"] = "Subscriptions";
+}
+
+@*@if (Model.IsSubscriber)
+{
+    <h3>Du abonnerer allerede på et abonnement. Kontakt oss for å slette/bytte abonnement.</h3>
+}
+else
+{
+}*@
+@*@await Html.PartialAsync("~/Views/Subscription/_ViewSubscriptionsCustomer.cshtml")*@
+
+@foreach (var subscription in Model)
+{
+    <div class="row">
+        <div class="card col" style="width: 18rem;">
+            <div class="card-body">
+                <h4 class="card-title text-dark">@subscription.SubscriptionName</h4>
+                <p class="card-text">@subscription.SubscriptionDescription</p>
+                <h5 class="card-title text-muted">Pris: @subscription.Price BTC</h5>
+                <form asp-action="Subscribe">
+                    <input type="hidden" value="@subscription.SubscriptionId" name="subscriptionId" />
+                    <input type="submit" class="btn btn-secondary card-link" value="Abonner" />
+                </form>
+            </div>
+        </div>
+    </div>
+}

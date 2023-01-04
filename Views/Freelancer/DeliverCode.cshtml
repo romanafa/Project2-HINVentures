@@ -1,0 +1,67 @@
+﻿@model HIN_Ventures.Models.Entities.SubmittedCodeVM
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@functions {
+    public string GetAntiXsrfRequestToken()
+    {
+        return Xsrf.GetAndStoreTokens(Context).RequestToken;
+    }
+}
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+
+@{
+    ViewBag.Title = "DeliverCode";
+    Layout = "Layout_Freelancer";
+}
+
+@{
+    var assignmentId = 0;
+    if (Model != null)
+    {
+        if (Model.Assignment != null)
+            assignmentId = Model.Assignment.AssignmentId;
+    }
+}
+
+
+<div id="code">
+<h5>Lever inn din kode</h5>
+    <button type="button" id="btnLines" onclick="getNumberOfLines()">Antall kodelinjer: </button> <span id="numberOfLines"></span>
+</div>
+
+<form method="post">
+    <input type="hidden" id="RequestVerificationToken" 
+           name="RequestVerificationToken" value="@GetAntiXsrfRequestToken()">
+    <textarea id="textAreaForCode" asp-for="Code"></textarea>
+    <label>% utført:</label>
+    <input name="progress" type="number"/>
+    <input type="hidden" name="assignmentId" value="@assignmentId"/>
+    <input type="hidden" id="numberOfLinesInput" name="numberOfLines"/>
+    <button type="submit" onclick="setNoOfLines()">Send inn</button>
+</form>
+
+ <!--https://stackoverflow.com/questions/2035910/how-to-get-the-number-of-lines-in-a-textarea-->
+<script>
+
+    function setNoOfLines() {
+        var lht = parseInt($('#textAreaForCode').css('lineHeight'), 10);
+        var lines = $('#textAreaForCode').prop('scrollHeight') / lht;
+        var noOfLines = Math.floor(lines);
+        $("#numberOfLinesInput").val(noOfLines);
+    }
+    
+
+    function getNumberOfLines() {
+        var lht = parseInt($('#textAreaForCode').css('lineHeight'), 10);
+        var lines = $('#textAreaForCode').prop('scrollHeight') / lht;
+        var noOfLines = Math.floor(lines);
+        $("#numberOfLines").text(noOfLines);
+        
+
+
+    }
+
+</script>
+

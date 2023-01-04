@@ -1,0 +1,70 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Chat";
+}
+
+<h5>CHAT med kunder - IKKE IMPLEMENTERT</h5>
+
+<div class="table-container">
+    <table class="table">
+    
+        <thead>
+    
+        <tr>
+            <td>Velg kunde:</td>
+        </tr>
+
+        </thead>
+    
+        <tbody>
+    
+        <tr>
+            <td>Kunde 1 fornavn</td>
+            <td>Kunde 1 etternavn</td>
+        </tr>
+        <tr>
+            <td>Kunde 2 fornavn</td>
+            <td>Kunde 2 etternavn</td>
+        </tr>
+
+        </tbody>
+    
+
+    </table>
+</div>
+
+    
+<div class="container">
+    <div class="row">&nbsp;</div>
+    <div class="row">
+        <div class="col-2">Kunde: </div>
+        <div class="col-4"><input type="text" id="userInput" /></div>
+    </div>
+    <div class="row">
+        <div class="col-2">Oppdragstittel</div>
+        <div class="col-4"><input type="text" id="titleInput" /></div>
+    </div>
+    <div class="row">
+        <div class="col-2">Oppdragsbeskrivelse</div>
+        <div class="col-4"><input type="text" id="descriptionInput" /></div>
+    </div>
+    <div class="row">&nbsp;</div>
+    <div class="row">
+        <div class="col-6">
+            <input type="button" id="sendButton" value="Send melding" />
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <ul id="messagesList"></ul>
+    </div>
+</div>
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/chat.js"></script>

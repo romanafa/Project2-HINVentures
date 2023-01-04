@@ -1,0 +1,86 @@
+﻿@model HIN_Ventures.Models.Viewmodels.AssignmentVM
+
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@functions {
+    public string GetAntiXsrfRequestToken()
+    {
+        return Xsrf.GetAndStoreTokens(Context).RequestToken;
+    }
+}
+
+
+<h6>Registrer nytt oppdrag</h6>
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <input type="hidden" asp-for="CustomerId" />
+            <input type="hidden" id="RequestVerificationToken" 
+                   name="RequestVerificationToken" value="@GetAntiXsrfRequestToken()">
+
+            <div>
+                <label>Kunde:</label>
+                <input name="customer"/>
+
+            </div>
+            <div>
+                <label asp-for="Title">Tittel:</label>
+                <input name="title" asp-for="Title" />
+
+            </div>
+            <div>
+                <label asp-for="Description">Beskrivelse av oppdrag:</label>
+                <input name="description" asp-for="Description" />
+                
+            </div>
+            
+            <div>
+                <label asp-for="Deadline">Frist:</label>
+                <input asp-for="Deadline" type="date"/>
+                
+            </div>
+            
+            <br/>
+        Ønskede kvalifikasjoner:
+            <div>
+                <select style="height: 285px" multiple="multiple" name="specialities" class="form-select-lg">
+
+                    <option value="1">Webapplikasjoner</option>
+                    <option value="2">C#</option>
+                    <option value="3">HTML</option>
+                    <option value="4">CSS</option>
+                    <option value="5">JavaScript</option>
+                    <option value="6">Typescript</option>
+                    <option value="7">Java</option>
+                    <option value="8">C++</option>
+                    <option value="9">Azure</option>
+                    <option value="10">ASP.NET</option>
+                    <option value="11">MVC</option>
+                    <option value="12">Blazor</option>
+                    <option value="13">Python</option>
+                    <option value="14">Android</option>
+                    <option value="15">XML</option>
+                    <option value="16">Ruby</option>
+                    <option value="17">Matlab</option>
+                    <option value="18">Kotlin</option>
+                    <option value="19">C</option>
+                    <option value="20">SQL</option>
+                    <option value="21">Room</option>
+                    <option value="22">Database</option>
+                    <option value="23">PHP</option>
+                    <option value="24">AI</option>
+                    <option value="25">Systemutvikling</option>
+                    <option value="26">Apputvikling</option>
+                    <option value="27">Systemarkitektur</option>
+                    <option value="28">Datasikkerhet</option>
+
+                </select>
+            </div>
+
+            <button id="sendButton" type="submit" onclick="updateClients()">Lagre</button>
+        </form>
+    </div>
+</div>
+
+
+

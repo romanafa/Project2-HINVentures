@@ -1,0 +1,43 @@
+﻿@model HIN_Ventures.Models.Entities.Subscription
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = null;
+}
+
+<h3>Oppdater abonnement</h3>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <input hidden asp-for="SubscriptionId" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label class="control-label">Abonnement tittel</label>
+                <input asp-for="SubscriptionName" class="form-control" />
+                <span asp-validation-for="SubscriptionName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Beskrivelse</label>
+                <input asp-for="SubscriptionDescription" class="form-control" />
+                <span asp-validation-for="SubscriptionDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Pris i BTC</label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Antall linjer</label>
+                <input asp-for="NumberOfLines" class="form-control" />
+                <span asp-validation-for="NumberOfLines" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <input type="submit" value="Lagre" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

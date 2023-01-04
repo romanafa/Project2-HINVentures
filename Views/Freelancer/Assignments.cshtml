@@ -1,0 +1,83 @@
+﻿@model IEnumerable<HIN_Ventures.Models.Entities.Assignment>
+
+@{
+    ViewBag.Title = "assignments";
+}
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+
+<h5>Velg oppdrag</h5>
+<title>Assignments</title>
+
+<div class="table-container">
+    <table class="table table-responsive-sm">
+
+        <thead>
+            <tr>
+                <td><h5>Tittel</h5></td>
+                <td><h5>Beskrivelse</h5></td>
+            </tr>
+        </thead>
+
+        @foreach (var assignment in Model.Where(x => x.Description != null && x.IsActive))
+
+        {
+
+            if (assignment.Title != null)
+            {
+
+                <tr>
+                    <td>
+                        @Html.ActionLink(assignment.Title, "DeliverCode", "Freelancer",
+                new { id = assignment.AssignmentId })
+                    </td>
+                    <td>
+                        @Html.ActionLink(assignment.Description, "DeliverCode", "Freelancer",
+                new { id = assignment.AssignmentId })
+                    </td>
+                </tr>
+
+            }
+
+        }
+
+    </table>
+</div>
+<script>
+
+    var url = "/api/Assignments/";
+
+    $(document).ready(function () {
+
+
+
+        //https://www.codegrepper.com/tpc/jquery+create+a+button
+
+        listAssignments(function (assignments) {
+
+
+            //var strComments = "";
+            $.each(assignments, function (index, assignment) {
+                assignment = "";
+                //$(".table-bordered").append(assignment);
+            });
+
+        });
+        function listAssignments(callback) {
+            $.ajax({
+                url: url,
+                data: {},
+                type: "GET",
+                contentType: "application/json;charset=utf-8",
+            }).then(function (assignments) {
+                callback(assignments);
+            });
+        }
+    });
+
+
+</script>
+
+

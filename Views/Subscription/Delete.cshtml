@@ -1,0 +1,28 @@
+﻿@model HIN_Ventures.Models.Entities.Subscription
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Slett abonnement</h2>
+<br />
+<h3>Vil du slette dette abonnementet?</h3>
+<div>
+    <h4>@Model.SubscriptionName</h4>
+    <hr />
+    <dl class="row">
+
+        <dt class="col-sm-2">
+            Abonnement beskrivelse:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SubscriptionDescription)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="SubscriptionId" />
+        <input type="submit" value="Slett" class="btn btn-danger" /> |
+        <a asp-controller="Subscription" asp-action="ManageSubscriptions">Tilbake</a>
+    </form>
+</div>

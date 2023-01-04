@@ -1,0 +1,27 @@
+﻿@model IEnumerable<HIN_Ventures.Models.Entities.Subscription>
+
+@foreach (var subscription in Model)
+{
+    <div class="row">
+        <div class="card col" style="width: 18rem;">
+            <div class="card-body">
+                <h4 class="card-title text-dark">@subscription.SubscriptionName</h4>
+                <h6 class="card-subtitle mb-2 text-muted">@subscription.NumberOfLines linjer</h6>
+                <p class="card-text">@subscription.SubscriptionDescription</p>
+                <h5 class="card-title text-muted">Pris: @subscription.Price BTC</h5>
+                <br/>
+                <div class=container>
+                    <div class="row justify-content-start">
+                        <div class="col-auto">
+                            <a onclick="showInSubscriptionPopUp('@Url.Action("Edit","Subscription", new { id = subscription.SubscriptionId },Context.Request.Scheme )','Oppdater abonnement')" class="btn btn-secondary card-link text-white"><i class="fa fa-pencil"></i> Rediger</a>
+                        </div>
+                        <div class="col-auto">
+                            <a asp-controller="Subscription" asp-action="Delete" asp-route-id="@subscription.SubscriptionId"
+                               class="btn btn-danger card-link text-white"><i class="fa fa-trash"></i> Slett</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

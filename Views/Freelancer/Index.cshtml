@@ -1,0 +1,155 @@
+﻿@model IEnumerable<HIN_Ventures.Models.Entities.Freelancer>
+
+@{
+    ViewBag.Title = "developers";
+    int totalRating = 0;
+}
+
+@*@using (Html.BeginForm("CategoryChosen", "Home", FormMethod.Get))
+{
+
+    <fieldset>
+
+        Rating
+
+        @Html.DropDownList("Rating")
+
+        <p>
+
+            <input type="submit" value="Submit" />
+
+        </p>
+
+    </fieldset>
+
+}*@
+
+
+<h5>Velg oppdrag</h5>
+
+<div class="table-container">
+    <table class="table">
+
+        <thead>
+            <tr>
+                <td>Fornavn</td>
+                <td>Etternavn</td>
+                <td>Spesialfelt</td>
+                <td>Gjennomsnittlig vurdering</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @foreach (var score in item.Score)
+                        {
+                            totalRating += score.ScoreValue;
+                          
+                        }
+                        @{
+                            int scoreCount = 1;
+                            if(item.Score.Count != null && item.Score.Count != 0)
+                            {
+                                scoreCount = item.Score.Count;
+                            }
+                            decimal averageRating = totalRating / scoreCount;
+                            totalRating = 0;
+                            
+                        }
+                        <p>Average rating:  @averageRating</p>
+
+                        @*<form action="Freelancer/EditRating">
+                            <input type="hidden" id="freelancerId" name="freelancerId" value=@item.Id>
+                            <label for="lang">Din vurdering</label>
+                            <select name="ratings" id="lang">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                            <input type="submit" value="Submit" />
+                        </form>*@
+                       @* @{
+                            int userRating = Convert.ToInt32(ratings.SelectedValue);
+                        }
+*@
+                      @*  <form method="post">
+                            
+                            <div>
+                                <select asp-for="ManufacturerId"
+                                    asp-items="@(new SelectList(Model.Manufacturers,"ManufacturerId","Name"))">
+                                </select>
+
+                            </div>
+                            <button type="submit">Create product</button>
+                        </form>*@
+
+                        
+
+
+                        <img src="~/images/starEmpty.png" alt="Star Rating" align="middle" id="1" class="rating" mid="@item.Id" />
+                        <img src="~/images/starEmpty.png" alt="Star Rating" align="middle" id="2" class="rating" mid="@item.Id" />
+                        <img src="~/images/starEmpty.png" alt="Star Rating" align="middle" id="3" class="rating" mid="@item.Id" />
+                        <img src="~/images/starEmpty.png" alt="Star Rating" align="middle" id="4" class="rating" mid="@item.Id" />
+                        <img src="~/images/starEmpty.png" alt="Star Rating" align="middle" id="5" class="rating" mid="@item.Id" />
+
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+
+<script type="text/javascript">
+
+
+
+
+    $(function () {
+
+
+        $("img.rating").mouseover(function () {
+            giveRating($(this), "starFilled.png");
+            $(this).css("cursor", "pointer");
+        });
+
+        $("img.rating").mouseout(function () {
+            giveRating($(this), "starEmpty.png");
+            refilRating($(this));
+        });
+
+        $("img.rating").click(function (e) {
+            // $("img.rating").unbind("mouseout mouseover click");
+            $(this).css('color', 'red');
+            // alert(e.currentTarget + ' was clicked!');
+            // call ajax methods to update database
+            var url = "/Movies/PostRating?rating=" + parseInt($(this).attr("id")) + "&mid=" + parseInt($(this).attr("mid"));
+            $.post(url, null, function (data) {
+                $(e.currentTarget).closest('tr').find('div.result').text(data).css('color', 'red') // $("#result").text(data);
+            });
+        });
+    });
+
+    function giveRating(img, image) {
+        img.attr("src", "/Images/" + image)
+            .prevAll("img.rating").attr("src", "/Images/" + image);
+    }
+    function refilRating(img1) {
+        var rt = $(img1).closest('tr').find("span.avr").text();
+        var img = $(img1).closest('tr').find("img[id='" + parseInt(rt) + "']");
+        img.attr("src", "/images/FilledStar.png").prevAll("img.rating").attr("src", "/images/FilledStar.png");
+    }
+
+
+</script>                    

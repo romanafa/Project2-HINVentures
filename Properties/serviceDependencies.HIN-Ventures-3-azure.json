@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "mssql2": {
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/hin-ventures-3-azure-azuredbserver/databases/HIN-Ventures-3-azure_db",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:HIN_VenturesContextConnectionAzure"
+    }
+  }
+}

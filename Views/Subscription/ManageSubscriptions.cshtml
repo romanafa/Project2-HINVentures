@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Manage subscriptions";
+}
+
+<br/>
+<div class="row pt-4">
+    <div class="col-6">
+        <h4>Alle abonnementer</h4>
+    </div>
+    <div class="col-6 text-end">
+        @*<a asp-controller="Subscription" asp-action="Create" class="btn btn-primary text-white">
+            <i class="fa fa-plus"></i> Ny abonnement*@
+        <a onclick="showInSubscriptionPopUp('@Url.Action("Create","Subscription",Context.Request.Scheme )','Ny abonnement')" class="btn btn-success text-white"><i class="fa fa-plus"></i> Ny abonnement</a>
+
+    </div>
+</div>
+
+<div id="view-all">
+    @await Html.PartialAsync("~/Views/Subscription/_ViewAllSubscriptions.cshtml")
+</div>

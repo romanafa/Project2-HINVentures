@@ -1,0 +1,46 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model HIN_Ventures.Models.Entities.Freelancer
+
+@{
+    ViewBag.Title = "Freelancers by speciality";
+    var specialities = ViewBag.Specialities;
+}
+
+<br />
+<h4>Klikk for å filtrere basert på spesialfelt</h4>
+
+@foreach (var item in @specialities)
+{
+    <input asp-route-id="@item.SpecialityId" type="button" id="specialityButton" class="text-dark btn btn-light btn-sm" name="@item.SpecialityId" value="@item.SpecialityName" />
+}
+
+<br />
+<br />
+<hr />
+<div id="freelancersBySpecialityPartialView"></div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script type="text/javascript">
+
+    // Script to populate partial view to show all freelancers by chosen speciality
+    $(document).ready(function () {
+        $('[id*=specialityButton]').on('click', function () {
+            $.ajax({
+                url: '@Url.Action("FreelancersBySpecialities", "Speciality")',
+                dataType: "html",
+                data: { "id": $(this).attr('name') },
+                type: "GET",
+                contentType: "application/json",
+                success: function (response) {
+                    $('#freelancersBySpecialityPartialView').html(response);
+                },
+                error: function (err) {
+                    alert(err.responseText);
+                }
+            });
+        });
+    });
+
+</script>

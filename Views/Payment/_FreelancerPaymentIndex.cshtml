@@ -1,0 +1,41 @@
+﻿@model List<HIN_Ventures.Models.Entities.Payment>
+
+
+<h5>Betalingsoversikt</h5>
+
+
+@{
+    var paymentStatus = "Nei";
+}
+
+<div class="table-container">
+
+    <table class="table">
+
+        <thead>
+        <th>Kunde</th>
+        <th>Oppdrag</th>
+        <th>Beløp (Bitcoin)</th>
+        <th>Utbetalt</th>
+
+        </thead>
+        <tbody>
+
+        @foreach (var payment in Model)
+        {
+            if (payment.Assignment.IsPayedToFreelancer)
+                paymentStatus = "Ja";
+
+            <tr>
+                <td>@payment.Assignment.CustomerName</td>
+                <td>@payment.Assignment.Description</td>
+                <td>@payment.Amount</td>
+                <td>@paymentStatus</td>
+            </tr>
+        }
+        </tbody>
+
+    </table>
+
+
+</div>

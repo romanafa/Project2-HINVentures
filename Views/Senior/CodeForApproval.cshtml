@@ -1,0 +1,76 @@
+﻿@model List<HIN_Ventures.Models.Entities.SubmittedCode>
+
+@{
+    ViewData["Title"] = "Code approval";
+}
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+
+<br />
+
+
+
+@if (Model != null)
+{
+    @for (var i = 0; i < Model.Count; i++)
+    {
+        
+        var status = "Ikke godkjent";
+        if (Model[i].IsApproved == true)
+            status = "Godkjent";
+
+        var id = Model[i].CodeId;
+        var idName = "showCode" + id.ToString();
+
+        <div class="table-container" style="border: 1px solid black; padding: 10px; margin: 10px">
+        <form method="post">
+
+            <div>
+                <div>Status: @status </div>
+                <div>Antall kodelinjer: @Model[i].NumberOfLines</div>
+                <div>Sendt inn: @Model[i].DateSubmitted</div>
+                <button type="button" onclick="showCode(@Model[i].CodeId)">
+                    <span class="badge badge-pill bg-info">
+                        <i class="fa fa-info">   Vis/skjul kode</i>
+                    </span>
+                </button>
+            </div>
+            <div id="@idName" style="display: none">@Model[i].Code</div>
+
+            <input type="hidden" name="id" value="@Model[i].CodeId" />
+            <input type="hidden" name="status" value="approved" />
+            <button type="submit">
+                <span class="badge badge-pill bg-success">
+                    <i class="fa fa-check">   Godkjent</i>
+                </span>
+            </button>
+
+        </form>
+
+        <form method="post">
+
+            <input type="hidden" name="id" value="@Model[i].CodeId" />
+            <input type="hidden" name="status" value="rejected" />
+            <button type="submit">
+                <span class="badge badge-pill bg-danger">
+                    <i class="fa fa-close">   Ikke godkjent</i>
+                </span>
+            </button>
+
+        </form>
+
+        </div>
+    }
+}
+
+
+<script>
+
+    function showCode(id) {
+        var name = "showCode" + id.toString();
+        $('#' + name).toggle();
+    }
+
+</script>

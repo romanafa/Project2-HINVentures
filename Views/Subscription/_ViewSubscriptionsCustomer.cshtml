@@ -1,0 +1,20 @@
+﻿@*@model IEnumerable<HIN_Ventures.Models.Entities.Subscription>
+
+@foreach (var subscription in Model)
+{
+    <div class="row">
+        <div class="card col" style="width: 18rem;">
+            <div class="card-body">
+                <h4 class="card-title text-dark">@subscription.SubscriptionName</h4>
+                <h6 class="card-subtitle mb-2 text-muted">@subscription.NumberOfLines linjer</h6>
+                <p class="card-text">@subscription.SubscriptionDescription</p>
+                <h5 class="card-title text-muted">Pris: @subscription.Price BTC</h5>
+                <form asp-action="Subscribe">
+                    <input type="hidden" value="@subscription.SubscriptionId" name="subscriptionId" />
+                    <input type="submit" class="btn btn-secondary card-link" value="Abonner" />
+                </form>
+            </div>
+        </div>
+    </div>
+}
+*@

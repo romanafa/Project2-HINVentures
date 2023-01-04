@@ -1,0 +1,61 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using HIN_Ventures.Static
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+@if (!User.Identity.IsAuthenticated)
+{
+    <br />
+    <div class="text-center">
+        <h2 class="display-">Velkommen til HIN Ventures</h2>
+    </div>
+
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center h-100">
+            <div class="col-3 list-group">
+                <button type="button" class="list-group-item list-group-item-primary">
+                    <a class="nav-link" id="register_freelancer" asp-area="Identity" asp-page="/Account/RegisterCustomer">Registrer deg som kunde >></a>
+                </button>
+                <button type="button" class="list-group-item list-group-item-primary">
+                    <a class="nav-link" id="register_freelancer" asp-area="Identity" asp-page="/Account/RegisterFreelancer">Registrer deg som freelancer >></a>
+                </button>
+
+                <button type="button" class="list-group-item list-group-item-primary">
+                    <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">Logg inn >></a>
+                </button>
+                <button type="button" class="list-group-item list-group-item-light" onclick="location.href='@Url.Action("About", "Home")'">Les om oss</button>
+            </div>
+        </div>
+    </div>
+}
+
+@if (User.IsInRole(Roles.RoleFreelancer))
+{
+    <partial name="_FreelancerDashboard" />
+}
+
+@if (User.IsInRole(Roles.RoleCustomer))
+{
+    <partial name="_CustomersDashboard" />
+}
+
+@if (User.IsInRole(Roles.RoleSeniorDeveloper))
+{
+    <partial name="_EmployeesDashboard" />
+}
+
+@if (User.IsInRole(Roles.RoleAdmin))
+{
+    <p>Ikke implementert enda</p>
+}
+
+@if (User.IsInRole(Roles.RoleHINEmployee))
+{
+    <partial name="_HINDashboard" />
+}

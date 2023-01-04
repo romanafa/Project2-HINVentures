@@ -1,0 +1,193 @@
+@using HIN_Ventures.Static
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - HIN_Ventures</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/HIN_Ventures.styles.css" asp-append-version="true" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3" >
+            <div class="container-fluid">
+                <a class="navbar-brand text-light" asp-area="" asp-controller="Home" asp-action="About">HIN_Ventures</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">
+                                <i class="material-icons nav-icons">home</i>
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">
+                                <i class="material-icons nav-icons">home</i>Dashboard
+                            </a>
+                        </li>
+                    }
+                        
+                    @if (User.IsInRole(Roles.RoleFreelancer))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Freelancer" asp-action="Assignments">
+                                <i class="material-icons nav-icons">assignment</i> Velg oppdrag
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Freelancer" asp-action="Account">
+                                <i class="material-icons nav-icons">person</i> Min konto
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Payment" asp-action="_FreelancerPaymentIndex">
+                                <i class="material-icons nav-icons">payment</i> Betalinger
+                            </a>
+                        </li>
+                    }
+
+                    @if (User.IsInRole(Roles.RoleCustomer))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Customer" asp-action="NewAssignment">
+                                <i class="material-icons nav-icons">assignment_add</i> Nytt oppdrag
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Speciality" asp-action="AllSpecialities">
+                                <i class="material-icons nav-icons">person_search</i> Utviklere
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Subscription" asp-action="Index">
+                                <i class="material-icons nav-icons">credit_score</i> Abonnement
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Payment" asp-action="_CustomerPaymentIndex">
+                                <i class="material-icons nav-icons">payment</i> Mine oppdrag
+                            </a>
+                        </li>
+                    }
+
+                    @if (User.IsInRole(Roles.RoleSeniorDeveloper))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Senior" asp-action="CodeForApproval">
+                                <i class="material-icons nav-icons">integration_instructions</i> Kode til godkjenning
+                            </a>
+
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Senior" asp-action="ShowAllAssignments">
+                                <i class="material-icons nav-icons">assignment</i> Alle oppdrag
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Payment" asp-action="ManagePayments">
+                                <i class="material-icons nav-icons">receipt_long</i> Administrer betalinger
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Subscription" asp-action="ManageSubscriptions">
+                                <i class="material-icons nav-icons">settings_suggest</i> Administrer abonnement
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Statistics" asp-action="Index">
+                                <i class="material-icons nav-icons">analytics</i> Statistikk
+                            </a>
+                        </li>
+                    }
+                        @if (User.IsInRole(Roles.RoleHINEmployee))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Payment" asp-action="_HINVenturesPaymentIndex">
+                                    <i class="material-icons nav-icons">integration_instructions</i> Administrer betalinger
+                                </a>
+
+                            </li>
+
+                        }
+                    </ul>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+
+    </header>
+<div class="container">
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="form-modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="fa fa-close" style="color:red"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                        
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="loaderbody" id="loaderbody">
+    <div class="loader"></div>
+</div>
+
+<footer class="border-top footer text-muted">
+
+        <div class="bottom">
+            <i class="material-icons">copyright</i>
+            <h6>
+                Utviklet av: Henrik Walstad Grevstad, Jørgen Breistrand Lampe og
+                Romana Faiglova
+            </h6>
+
+            <h6>Webapplikasjoner 2, høst 2022 </h6>
+
+        </div>
+
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+
+@if (User.IsInRole(Roles.RoleCustomer))
+{
+        <script src="~/js/signalRCustomer.js" asp-append-version="true"></script>
+}
+@if (User.IsInRole(Roles.RoleFreelancer))
+{
+    <script src="~/js/signalRFreelancer.js" asp-append-version="true"></script>
+}
+
+
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,62 @@
+﻿<div class="menu-container">
+    <div class="images-container" onclick="navigateToAssignments()">
+        <img src="/images/oppdrag.jpg" width="300px" height="250px" alt="bla gjennom oppdrag" />
+        <div class="dashboard-top">
+            <i class="material-icons">assignment</i>
+            BLA GJENNOM OPPDRAG
+        </div>
+    </div>
+    <div class="images-container" onclick="navigateToAccount()">
+        <img src="/images/min konto og vurdering.png" width="300px" height="250px" alt="min konto og vurdering" />
+        <div class="dashboard-top">
+            <i class="material-icons">person</i>
+            MIN KONTO OG VURDERING
+        </div>
+    </div>
+</div>
+<div class="menu-container">
+    <div class="images-container" onclick="navigateToPayment()">
+        <img src="/images/betalinger.jpg" width="300px" height="250px" alt="betalinger" />
+        <div class="dashboard-bottom">
+            <i class="material-icons">payments</i>
+            BETALINGER
+        </div>
+    </div>
+    <div class="images-container" onclick="navigateToSendMessage()">
+        <img src="/images/send melding.jpg" width="300px" height="250px" alt="send melding" />
+        <div class="dashboard-bottom">
+            <i class="material-icons">mail</i>
+            SEND MELDING
+        </div>
+    </div>
+    <div class="images-container" onclick="navigateToAbout()">
+        <img src="/images/om hin-ventures.jpg" width="300px" height="250px" alt="om hin ventures" />
+        <div class="dashboard-bottom">
+            <i class="material-icons">info</i>
+            OM HIN-VENTURES
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+
+    function navigateToAssignments() {
+        window.location.href = "/freelancer/assignments";
+    }
+    function navigateToSendMessage() {
+        window.location.href = "/freelancer/chat";
+    }
+    function navigateToPayment() {
+        window.location.href = "/payment/_freelancerPaymentIndex";
+    }
+    function navigateToAccount() {
+        window.location.href = "/freelancer/account";
+    }
+    function navigateToAbout() {
+        window.location.href = "/freelancer/about";
+    }
+</script>
+
+

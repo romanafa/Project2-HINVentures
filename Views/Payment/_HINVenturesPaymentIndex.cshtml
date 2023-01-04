@@ -1,0 +1,58 @@
+﻿@model List<HIN_Ventures.Models.Entities.Payment>
+
+<h6>Betalingsoversikt</h6>
+
+@{
+    var paymentStatus = "Nei";
+}
+
+<div class="table-container">
+
+    <table class="table">
+
+        <thead>
+        <th>Kunde</th>
+        <th>Freelancer</th>
+        <th>Oppdrag</th>
+        <th>Beløp (Bitcoins)</th>
+        <th>Utbetalt</th>
+
+        </thead>
+        <tbody>
+
+            @foreach (var payment in Model)
+            {
+                if (payment.Assignment.IsPayedToFreelancer)
+                    paymentStatus = "Ja";
+
+                var linesOfCode = 0;
+                if (payment.Assignment.SubmittedCode != null)
+                {
+                    linesOfCode = payment.Assignment.SubmittedCode.NumberOfLines;
+                }
+                
+
+                <tr>
+                    <td>@payment.Assignment.CustomerName</td>
+                    <td>@payment.Assignment.FreelancerName</td>
+                    <td>@payment.Assignment.Description</td>
+                    <td>@payment.Amount</td>
+                    <td>@paymentStatus</td>
+                    <td>
+                        <form method="post">
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Betal</button>
+                            <input type="hidden" name="numberOfLines" value="@linesOfCode"/>
+                            <input type="hidden" name="customerId" value="@payment.Assignment.CustomerId"/>
+                            <input type="hidden" name="freelancerId" value="@payment.Assignment.FreelancerId"/>
+                            <input type="hidden" name="assignmentId" value="@payment.Assignment.AssignmentId"/>
+                        </form>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+
+</div>
